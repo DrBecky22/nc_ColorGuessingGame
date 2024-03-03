@@ -1,0 +1,11 @@
+* {
+    background-color: azure;
+    font-family: "Ojuju", sans-serif;
+    text-align: center;
+}
+
+button {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
