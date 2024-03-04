@@ -15,11 +15,36 @@
         const COLORS_ARRAY = ['blue', 'cyan', 'gold', 'gray', 'green', 'magenta', 'orange', 'red', 'white', 'yellow'];
         
         function runGame() {
-
+            let correct = false;
+            let i = Math.floor(Math.random() *  COLORS_ARRAY.length);
+            let randomColor = COLORS_ARRAY[i]
+            let attempts = 0;
+            //return randomColor;
+            //console.log(randomColor);
         }
+        
+        do {
+        let guess = prompt("I'm thinking of one of these colors: \n " + COLORS_ARRAY.join(", ") + "\n which one am I thining?");
+        while (!correct);
+        guess = guess.toLowerCase;
+        attempts++
 
-        function checkGuess(guess, target) {
+        } 
 
+        function checkGuess(guess, randomColor) {
+            let corrrect = false;
+            if (COLORS_ARRAY.includes(guess) === false){
+                alert("Your guess is not in the array, guess again using one of the colors listed");
+            } else if (guess > randomColor.sort()) {
+                alert("the color I'm thinking is earlier in the alphabet, guess again");
+            } else if (guess < randomColor.sort()) {
+                alert("the color I'm thiniing is later in the alphabet, guess again");
+            } else {
+                correct = true;
+                alert('Congratulations you guessed it! It took you' + attempts + )
+
+            }
+            
         }
     </script>
 </body>
