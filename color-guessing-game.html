@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap" rel="stylesheet">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap" rel="stylesheet"> -->
     <title>Color Guessing Game</title>
-<body bgcolor="azure">
+<body>
     <center>
         <h1 style="font-family:Ojuju">Color Guessing Game</h1>
         <button type = "button" onclick = "runGame()">Start Game</button>
@@ -18,35 +17,45 @@
         const COLORS_ARRAY = ['blue', 'cyan', 'gold', 'gray', 'green', 'magenta', 'orange', 'red', 'white', 'yellow'];
         
         function runGame() {
+            let guess ="";
             let correct = false;
-            let i = Math.floor(Math.random() * COLORS_ARRAY.length);
-            let randomColor = COLORS_ARRAY[i];
+            const targetIndex = Math.floor(Math.random() * COLORS_ARRAY.length);
+            const target = COLORS_ARRAY[targetIndex];
             let attempts = 0;
-            console.log(i);
-            console.log(randomColor);
+            console.log(target);
 
             do {
-                let guess = prompt("I'm thinking of one of these colors: \n " + COLORS_ARRAY.join(", ") + "\n Which one am I thinking?");
-                guess = guess.toLowerCase;
-                attempts++
-            } while (!correct);
+                let guess = prompt("I'm thinking of one of these colors: \n\n " + COLORS_ARRAY.join(", ") + "\n\n Which one am I thinking?");
+                // guess = guess.toLowerCase();
 
+                if (guess === null) {
+                    alert("game has ended, press the button to start again");
+                    return;
+                }
+
+                attempts+=
+                correct = checkGuess(guess, target);
+
+            } while (correct === false);
+
+            alert('Congratulations you guessed it! It took you ' + attempts + ' to guess the right answer');
+            document.body.style.background = guess;
         }
-        
-        function checkGuess(guess, randomColor) {
-            //let corrrect = false;
-            if (COLORS_ARRAY.includes(guess) === false){
-                alert("Your guess is not in the array, guess again using one of the colors listed");
-            } else if (guess > randomColor.sort()) {
-                alert("the color I'm thinking is earlier in the alphabet, guess again");
-            } else if (guess < randomColor.sort()) {
-                alert("the color I'm thiniing is later in the alphabet, guess again");
-            } else {
-                correct = true;
-                alert('Congratulations you guessed it! It took you' + attempts + 'to guess the right answer')
 
+
+        function checkGuess(guess, target) {
+            let correct = false;
+                if (COLORS_ARRAY.includes(guess) === false){
+                    alert("Your guess is not in the array, guess again using one of the colors listed");
+                } else if (guess.localeCompare(target) < 0) {
+                    alert("the color I'm thinking is earlier in the alphabet, guess again");
+                } else if (guess.localeCompare(target) === 1) {
+                    alert("the color I'm thiniing is later in the alphabet, guess again");
+                } else {
+                    correct = true;
+                }
+                return correct;
             }
-        }
     </script>
 </body>
 </html>
